@@ -1,0 +1,181 @@
+@inherits RocketCatalog.Components.RocketCatalogTokens<Simplisity.SimplisityRazor>
+@using DNNrocketAPI;
+@using Simplisity;
+@using RocketCatalog.Components;
+@using DNNrocketAPI.Components;
+
+@AddProcessData("resourcepath", "/DesktopModules/DNNrocket/Images/App_LocalResources/")
+@AddProcessData("resourcepath", "/DesktopModules/DNNrocket/api/App_LocalResources/")
+@AddProcessData("resourcepath", "/DesktopModules/DNNrocketModules/RocketCatalog/App_LocalResources/")
+
+
+@{
+    var info = new SimplisityInfo();
+    var articleData = (ArticleLimpet)Model.List.First();
+    if (articleData.Info != null)
+    {
+        info = articleData.Info;
+    }
+    var portalShop = new PortalCatalogLimpet(articleData.PortalId, DNNrocketUtils.GetEditCulture());
+}
+
+    <div class='w3-animate-opacity'>
+
+        <div class="w3-row w3-padding">
+            <div class="w3-col m2 w3-button rocket-buttonbar w3-green simplisity_click savearticlebutton langchangesave" s-list=".imagelist,.documentlist,.linklist" s-cmd="articleadmin_savedata" s-post="#articledatasection" s-return=".articlepopup"  s-fields='{"articleid":"@info.ItemID"}'>@ButtonText(ButtonTypes.save)</div>
+            <div class="w3-col m2 w3-button rocket-buttonbar w3-red simplisity_confirmclick" s-confirm="@ResourceKey("DNNrocket.delete","","confirm")" s-cmd="articleadmin_delete" s-fields='{"articleid":"@info.ItemID"}'>@ButtonText(ButtonTypes.delete)</div>
+
+            @if (Model.GetSettingBool("saved"))
+            {
+                <i class='fas fa-save w3-right simplisity_fadeout' style="font-size:24px"></i>
+            }
+
+        </div>
+
+        <div id="articledatasection" class="">
+            <!-- The Detail-->
+            <div id="detailDisplay" class="w3-container">
+
+                <div class='w3-row'>
+                    <div class="w3-third w3-padding">
+                        <label>@ResourceKey("RC.name")</label>
+                        @TextBox(info, "genxml/textbox/name", " class='w3-input w3-border' autocomplete='off' ", "", false, 0)
+                    </div>
+                    <div class="w3-twothird w3-padding">
+                        <label>@ResourceKey("RC.keywords")</label>
+                        @TextArea(info, "genxml/textbox/keywords", "class='' ", "", false, 0)
+                    </div>
+                </div>
+
+                <div class='w3-row w3-padding'>
+
+                    <div class="w3-col m12 w3-theme-l3 w3-margin-top">
+                        <div class="w3-bar-item w3-button tablink htmltexttablink" onclick="openSection('htmltext')">@ResourceKey("RC.html")</div>
+                        <div class="w3-bar-item w3-button tablink textstablink" onclick="openSection('texts');">@ResourceKey("RC.text")</div>
+                        <div class="w3-bar-item w3-button tablink summarystablink" onclick="openSection('summarys');">@ResourceKey("RC.summary")</div>
+                        <div class="w3-bar-item w3-button tablink catstablink" onclick="openSection('cats');">@ResourceKey("RC.categories")</div>
+                        <div class="w3-bar-item w3-button tablink imgstablink" onclick="openSection('imgs');">@ResourceKey("DNNrocket.images")</div>
+                        <div class="w3-bar-item w3-button tablink docstablink" onclick="openSection('docs');">@ResourceKey("DNNrocket.documents")</div>
+                        <div class="w3-bar-item w3-button tablink linkstablink" onclick="openSection('links');">@ResourceKey("DNNrocket.links")</div>
+                    </div>
+
+                    <div id="htmltext" class='w3-row sectionname' style="display:none">
+                        <div class='w3-col m12 w3-padding'>
+                            @EditFlag()
+                        </div>
+                    </div>
+
+                    <div id="texts" class='w3-row sectionname' style="display:none">
+                        <div class='w3-col m12 w3-padding '>
+                            @TextArea(info, "genxml/textbox/text", "rows='6' onkeyup='textAreaAdjust(this);' style='width:100%;overflow:hidden;' ", "", false, 0)
+                        </div>
+                    </div>
+
+                    <div id="summarys" class='w3-row sectionname' style="display:none">
+                        <div class='w3-col m12 w3-padding '>
+                            @TextArea(info, "genxml/textbox/summary", "rows='6' onkeyup='textAreaAdjust(this);' style='width:100%;overflow:hidden;' ", "", false, 0)
+                        </div>
+                    </div>
+
+                    <div id="cats" class='w3-row sectionname' style="display:none">
+                        <div class='w3-col m12 w3-padding '>
+                            @RenderTemplate("ArticleCategoryList.cshtml", portalShop.AppTheme, Model, true)
+                            @RenderTemplate("ArticleCategorySelect.cshtml", portalShop.AppTheme, Model, true)
+                        </div>
+                    </div>
+
+                    <div id="imgs" class='w3-row sectionname' style="display:none">
+                        <div class='w3-col m12 w3-padding '>
+                            @RenderTemplate("articleimages.cshtml", portalShop.AppTheme, Model, true)
+                            @RenderTemplate("articleImageSelect.cshtml", portalShop.AppTheme, Model, true)
+                        </div>
+                    </div>
+
+                    <div id="docs" class='w3-row sectionname' style="display:none">
+                        <div class='w3-col m12 w3-padding '>
+                            @RenderTemplate("articledocuments.cshtml", portalShop.AppTheme, Model, true)
+                            @RenderTemplate("articledocumentSelect.cshtml", portalShop.AppTheme, Model, true)
+                        </div>
+                    </div>
+
+                    <div id="links" class='w3-row sectionname' style="display:none">
+                        <div class='w3-col m12 w3-padding '>
+                            @RenderTemplate("articlelinks.cshtml", portalShop.AppTheme, Model, true)
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+<div>
+    @if (UserUtils.IsInRole("Administrator"))
+    {
+        <div class="w3-container">
+            <div class="w3-right">
+                @RenderXml(info)
+            </div>
+        </div>
+    }
+    <i>ID: </i> @info.ItemID <i> GuidKey:</i> @info.GUIDKey
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+        var sectionName = simplisity_getCookieValue('sectionName');
+        if ((typeof sectionName === 'undefined') || sectionName === '') {
+            sectionName = 'cats';
+        }
+        openSection(sectionName);
+
+        $('#keywords').tagEditor({
+            delimiter: ', ', /* space and comma */
+            placeholder: '@ResourceKey("RE.keywords") ...',
+            removeDuplicates: false,
+        });
+
+        $('#summary').trigger('onkeyup');
+        $('#text').trigger('onkeyup');
+
+    });
+
+    function textAreaAdjust(element) {
+      element.style.height = "1px";
+      element.style.height = (25+element.scrollHeight)+"px";
+    }
+
+    function openSection(sectionName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("sectionname");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        $(".tablink").each(function (index) {
+            $(this).removeClass('w3-theme-d5');
+        });
+
+        document.getElementById(sectionName).style.display = "block";
+
+        $('.' + sectionName + 'tablink').addClass('w3-theme-d5');
+
+        simplisity_setCookieValue('sectionName', sectionName);
+
+        // so the hidden one gets adjusted
+        $('#summary').trigger('onkeyup');
+        $('#text').trigger('onkeyup');
+
+    }
+
+    function languageChange() {
+        $('.langchangesave').trigger("click");
+    }
+
+</script>
+
+
+
