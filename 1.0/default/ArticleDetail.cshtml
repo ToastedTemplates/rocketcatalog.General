@@ -22,8 +22,8 @@
     <div class='w3-animate-opacity'>
 
         <div class="w3-row w3-padding">
-            <div class="w3-col m2 w3-button rocket-buttonbar w3-green simplisity_click savearticlebutton langchangesave" s-list=".imagelist,.documentlist,.linklist" s-cmd="articleadmin_savedata" s-post="#articledatasection" s-return=".articlepopup"  s-fields='{"articleid":"@info.ItemID"}'>@ButtonText(ButtonTypes.save)</div>
-            <div class="w3-col m2 w3-button rocket-buttonbar w3-red simplisity_confirmclick" s-confirm="@ResourceKey("DNNrocket.delete","","confirm")" s-cmd="articleadmin_delete" s-fields='{"articleid":"@info.ItemID"}'>@ButtonText(ButtonTypes.delete)</div>
+            <div class="w3-col m2 w3-button rocket-buttonbar w3-green simplisity_click savearticlebutton langchangesave" s-list=".imagelist,.documentlist,.linklist" s-cmd="articleadmin_savedata" s-post="#articledatasection" s-return=".articlepopup"  s-fields='{"articleid":"@articleData.ArticleId"}'>@ButtonText(ButtonTypes.save)</div>
+            <div class="w3-col m2 w3-button rocket-buttonbar w3-red simplisity_confirmclick" s-confirm="@ResourceKey("DNNrocket.delete","","confirm")" s-cmd="articleadmin_delete" s-fields='{"articleid":"@articleData.ArticleId"}'>@ButtonText(ButtonTypes.delete)</div>
 
             @if (Model.GetSettingBool("saved"))
             {
@@ -79,22 +79,21 @@
 
                     <div id="cats" class='w3-row sectionname' style="display:none">
                         <div class='w3-col m12 w3-padding '>
-                            @RenderTemplate("ArticleCategoryList.cshtml", portalShop.AppTheme, Model, true)
-                            @RenderTemplate("ArticleCategorySelect.cshtml", portalShop.AppTheme, Model, true)
+                            RenderTemplate("ArticleCategoryList.cshtml", portalShop.AppTheme, Model, true)
+                            RenderTemplate("ArticleCategorySelect.cshtml", portalShop.AppTheme, Model, true)
                         </div>
                     </div>
 
                     <div id="imgs" class='w3-row sectionname' style="display:none">
                         <div class='w3-col m12 w3-padding '>
-                            @RenderTemplate("articleimages.cshtml", portalShop.AppTheme, Model, true)
-                            @RenderTemplate("articleImageSelect.cshtml", portalShop.AppTheme, Model, true)
+                            RenderTemplate("articleimages.cshtml", portalShop.AppTheme, Model, true)
+                            RenderTemplate("articleImageSelect.cshtml", portalShop.AppTheme, Model, true)
                         </div>
                     </div>
 
                     <div id="docs" class='w3-row sectionname' style="display:none">
                         <div class='w3-col m12 w3-padding '>
                             @RenderTemplate("articledocuments.cshtml", portalShop.AppTheme, Model, true)
-                            @RenderTemplate("articledocumentSelect.cshtml", portalShop.AppTheme, Model, true)
                         </div>
                     </div>
 

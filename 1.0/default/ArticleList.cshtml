@@ -16,7 +16,7 @@
 <div class='w3-animate-opacity'>
 
     <div class="w3-row w3-padding">
-        <div class="w3-col m2 w3-button rocket-buttonbar w3-green simplisity_click" s-cmd="articleadmin_addarticle" s-fields='{"articleid":"-1","sitekey":"@(articleDataList.PortalCatalog.SiteKey)"}'>@ButtonText(ButtonTypes.add)</div>
+        <div class="w3-col m2 w3-button rocket-buttonbar w3-green simplisity_click"  s-after="showpopup" s-cmd="articleadmin_addarticle" s-return=".articlepopup" s-fields='{"articleid":"-1","sitekey":"@(articleDataList.PortalCatalog.SiteKey)"}'>@ButtonText(ButtonTypes.add)</div>
     </div>
 
     <div class="w3-bar w3-card searchdata w3-padding">
@@ -75,8 +75,7 @@
 
         </div>
 
-
-        @RenderTemplate("ArticlePaging.cshtml", "\\DesktopModules\\DNNrocketModules\\RocketCatalog", "config-w3", Model, "1.0", true)
+        @RenderTemplate("ArticlePaging.cshtml", articleDataList.PortalCatalog.AppTheme, Model, true)
 
     </div>
 </div>
@@ -84,11 +83,10 @@
 
 <div id="id01" class="w3-modal ">
     <div class="w3-modal-content w3-animate-opacity" style="width:95%;">
-        <header class="w3-container w3-theme-d4">
+        <header class="w3-container w3-theme-d4" style="height:38px;">
             <div class="w3-button w3-display-topright simplisity_click" s-cmd="articleadmin_editlist" s-fields=''>
                 &times;
             </div>
-            <h2>@ResourceKey("RC.article")</h2>
         </header>
         <div class="w3-container articlepopup">
         </div>
