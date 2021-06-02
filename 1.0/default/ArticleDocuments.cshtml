@@ -18,33 +18,8 @@
 <div class="w3-row documentlistdatasection">
 
     <div class="w3-container">
-        <div class="w3-col w3-padding">
-            @if (articleData.GetDocList().Count < articleData.PortalCatalog.ArticleDocumentLimit)
-            {
-                <div class="w3-button w3-teal w3-padding-8 simplisity_click" s-post="#articledatasection" s-return=".articlepopup" s-list=".imagelist,.documentlist,.linklist" s-cmd="articleadmin_adddoc" s-fields='{"articleid":"@articleData.ArticleId"}'>@ButtonIcon(ButtonTypes.add)</div>
-            }
-            else
-            {
-        <div class="w3-button w3-teal w3-padding-8" onclick="$('#articledocumentlimitmsg').show();">@ButtonIcon(ButtonTypes.add)</div>
-
-                <div id="articledocumentlimitmsg" class="w3-modal">
-                    <div class="w3-modal-content" style="width:40%;">
-                        <header class="w3-theme-d5 w3-center" style="height: 38.5px;">
-                            <span onclick="$('#articledocumentlimitmsg').hide();" class="w3-button w3-display-topright">&times;</span>
-                        </header>
-                        <div class="" style="">
-                            <br />
-                            <div class="w3-container">
-                                <img src="/DesktopModules/DNNrocket/api/images/avatar3.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-                                <h2>@ResourceKey("RC.articledocumentlimit")</h2>
-                                <p>@ResourceKey("RC.articledocumentlimit", "", "Msg")</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-            <div class="w3-button rocket-buttonbar w3-pale-yellow w3-padding-8 simplisity_itemundo" s-recylebin="documentlistbin" s-return="#documentlistdata" s-removelist=".documentlist" style="display: none;">@ButtonIcon(ButtonTypes.undo)</div>
-        </div>
+        <div class="w3-button w3-teal w3-padding-8" onclick="$('#articledocumentselect').show();">@ButtonIcon(ButtonTypes.add)</div>
+        <div class="w3-button w3-pale-yellow w3-padding-8 simplisity_itemundo" s-recylebin="documentlistbin" s-return="#documentlistdata" s-removelist=".documentlist" style="display: none;">@ButtonIcon(ButtonTypes.undo)</div>
     </div>
 
     <ul id="documentlistdata" class="w3-ul">
@@ -56,25 +31,17 @@
 
                 <div class="w3-display-container w3-padding w3-card">
                     <div class="w3-row">
-                        <div class="w3-col m8">
-                            <label class="">@ResourceKey("DNNrocket.document")</label>&nbsp;@EditFlag()
-
-                            <div class="w3-display-container">
-                                @HiddenField(docInfo, "genxml/hidden/doc", "", "", false, docLP, "")
-                                @HiddenField(docInfo, "genxml/hidden/reldoc", "", "", false, docLP, "")
-                                @TextBox(docInfo, "genxml/lang/genxml/textbox/namedoc", " class='w3-input w3-border' ", "", true, docLP)
-                                <span class="w3-button w3-transparent w3-display-topright docselectbutton@(docLP) " onclick="savedocumentlp(@(docLP))" s-cmd="articleadmin_docselectlist" s-fields='{"articleid":"@(articleData.ArticleId)"}' s-return="#articledocumentselect" title="">
-                                    <i class="fas fa-file-upload"></i>
-                                </span>
-                            </div>
-
+                        <span id="deletebutton@(docLP)" onclick="" class="w3-button w3-display-topright simplisity_removelistitem" s-removelist=".documentlist" s-recylebin="documentlistbin">
+                            @ButtonIcon(ButtonTypes.remove)
+                        </span>
+                        <div class="w3-col m8 w3-padding">
+                            @HiddenField(docInfo, "genxml/hidden/documentpatharticledoc", "", "", false, docLP)
+                            <label class="">@ResourceKey("DNNrocket.document")</label>
+                            @TextBox(docInfo, "genxml/textbox/documentnamearticledoc", " class='w3-input w3-border' ", "", false, docLP)
                         </div>
-                        <div class="w3-col w3-padding" style="width:160px">
-                            <label class="">@ResourceKey("DNNrocket.justify")</label>
-                            @RadioButtonList(docInfo, "genxml/hidden/layout", "0,1,2", "<i class='fas fa-align-left'></i>,<i class='fas fa-align-center'></i>,<i class='fas fa-align-right'></i>", "class=''", "0", "", false, docLP)
-                        </div>
-                        <div class="simplisity_removelistitem w3-right" s-removelist=".documentlist" s-recylebin="documentlistbin" style="cursor: pointer;">
-                            <i title="@ResourceKey("DNNrocket.delete")" class=" fas fa-minus-square fa-fw fa-lg"></i>
+                        <div class="w3-col m2 w3-padding" style="">
+                            <label class="">@ResourceKey("DNNrocket.hidden")</label>&nbsp;@EditFlag()<br/>
+                            @CheckBox(docInfo, "genxml/lang/genxml/checkbox/documenthiddenarticledoc", "", "class='w3-check'", false, false, docLP)
                         </div>
                     </div>
                 </div>
@@ -90,10 +57,5 @@
         $("#documentlistdata").sortable();
         $("#documentlistdata").disableSelection();
     });
-
-    function savedocumentlp(lp) {
-        simplisity_setParamField('docselectbuttonlp', lp)
-        simplisity_callserver($('.docselectbutton' + lp))
-    }
 
 </script>

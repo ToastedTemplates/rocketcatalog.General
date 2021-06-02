@@ -36,7 +36,7 @@
                 <div class="w3-display-container w3-padding w3-card">
                     <div class="w3-row">
                         <span id="deletebutton@(imgLP)" onclick="" class="w3-button w3-display-topright simplisity_removelistitem" s-removelist=".imagelist" s-recylebin="imagelistbin">
-                            <i title="Remove" class="fas fa-minus-square fa-fw fa-lg"></i>
+                            @ButtonIcon(ButtonTypes.remove)
                         </span>
                         <div class="w3-col m2 w3-padding" style="width:100px;">
                             @if (articleImage.RelPath != "")
