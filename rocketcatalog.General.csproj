@@ -2,12 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Configurations>Debug;Release;Comp All;CompAll</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\DNNrocketModules\RocketCatalog\RocketCatalog.csproj" />
     <ProjectReference Include="..\..\DNNrocket\API\DNNrocketAPI.csproj" />
     <ProjectReference Include="..\..\DNNrocket\Simplisity\Simplisity.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="1.0\js\" />
   </ItemGroup>
 
 </Project>
