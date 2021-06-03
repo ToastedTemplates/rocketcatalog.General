@@ -16,7 +16,8 @@
     {
         info = articleData.Info;
     }
-    var portalShop = new PortalCatalogLimpet(articleData.PortalId, DNNrocketUtils.GetEditCulture());
+    var portalCatalog = new PortalCatalogLimpet(articleData.PortalId, DNNrocketUtils.GetEditCulture());
+    var appThemeSystem = new AppThemeSystemLimpet(portalCatalog.SystemKey);
 }
 
     <div class='w3-animate-opacity'>
@@ -79,28 +80,28 @@
 
                     <div id="cats" class='w3-row sectionname' style="display:none">
                         <div class='w3-col m12 w3-padding '>
-                            RenderTemplate("ArticleCategoryList.cshtml", portalShop.AppTheme, Model, true)
-                            RenderTemplate("ArticleCategorySelect.cshtml", portalShop.AppTheme, Model, true)
+                            @RenderTemplate("ArticleCategoryList.cshtml", appThemeSystem, Model, true)
+                            @RenderTemplate("ArticleCategorySelect.cshtml", appThemeSystem, Model, true)
                         </div>
                     </div>
 
                     <div id="imgs" class='w3-row sectionname' style="display:none">
                         <div class='w3-col m12 w3-padding '>
-                            @RenderTemplate("articleimages.cshtml", portalShop.AppTheme, Model, true)
-                            @RenderTemplate("articleImageSelect.cshtml", portalShop.AppTheme, Model, true)
+                            @RenderTemplate("articleimages.cshtml", portalCatalog.AppTheme, Model, true)
+                            @RenderTemplate("articleImageSelect.cshtml", portalCatalog.AppTheme, Model, true)
                         </div>
                     </div>
 
                     <div id="docs" class='w3-row sectionname' style="display:none">
                         <div class='w3-col m12 w3-padding '>
-                            @RenderTemplate("articledocuments.cshtml", portalShop.AppTheme, Model, true)
-                            @RenderTemplate("articledocumentSelect.cshtml", portalShop.AppTheme, Model, true)
+                            @RenderTemplate("articledocuments.cshtml", portalCatalog.AppTheme, Model, true)
+                            @RenderTemplate("articledocumentSelect.cshtml", portalCatalog.AppTheme, Model, true)
                         </div>
                     </div>
 
                     <div id="links" class='w3-row sectionname' style="display:none">
                         <div class='w3-col m12 w3-padding '>
-                            @RenderTemplate("articlelinks.cshtml", portalShop.AppTheme, Model, true)
+                            @RenderTemplate("articlelinks.cshtml", portalCatalog.AppTheme, Model, true)
                         </div>
                     </div>
 
