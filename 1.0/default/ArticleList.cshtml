@@ -11,12 +11,15 @@
     var articleDataList = (ArticleLimpetList)Model.List.First();
     var lp1 = 0;
     var passModel = new SimplisityRazor(articleDataList.PortalCatalog, new Dictionary<string, string>());
+    var appThemeSystem = new AppThemeSystemLimpet("rocketcatalog");
 }
+
+@RenderTemplate("Popups.cshtml", appThemeSystem, Model, false)
 
 <div class='w3-animate-opacity'>
 
     <div class="w3-row w3-padding">
-        <div class="w3-col m2 w3-button rocket-buttonbar w3-green simplisity_click"  s-after="showpopup" s-cmd="articleadmin_addarticle" s-return=".articlepopup" s-fields='{"articleid":"-1","sitekey":"@(articleDataList.PortalCatalog.SiteKey)"}'>@ButtonText(ButtonTypes.add)</div>
+        <div class="w3-col m2 w3-button rocket-buttonbar w3-green simplisity_click" s-cmd="articleadmin_addarticle" s-return=".articleeditpopup" s-fields='{"articleid":"-1","sitekey":"@(articleDataList.PortalCatalog.SiteKey)"}'>@ButtonText(ButtonTypes.add)</div>
     </div>
 
     <div class="w3-bar w3-card searchdata w3-padding">
@@ -60,7 +63,7 @@
                 @foreach (ArticleLimpet articleData in articleDataList.GetArticleList())
                 {
                     lp1 += 1;
-                    <li class="categorylist w3-row simplisity_click" s-after="showpopup" s-cmd="articleadmin_editarticle" s-return=".articlepopup" s-fields='{"articleid":"@articleData.ArticleId","track":"false"}'>
+                    <li class="categorylist w3-row simplisity_click" s-cmd="articleadmin_editarticle" s-return=".articleeditpopup" s-fields='{"articleid":"@articleData.ArticleId","track":"false"}'>
                         <div class="w3-rest w3-card " style="cursor: pointer;">
                             <div class="w3-bar w3-card " style="">
                                 <div class="w3-bar-item">
@@ -77,19 +80,6 @@
 
         @RenderTemplate("ArticlePaging.cshtml", articleDataList.PortalCatalog.AppTheme, Model, true)
 
-    </div>
-</div>
-
-
-<div id="id01" class="w3-modal ">
-    <div class="w3-modal-content w3-animate-opacity" style="width:95%;">
-        <header class="w3-container w3-theme-d4" style="height:38px;">
-            <div class="w3-button w3-display-topright simplisity_click" s-cmd="articleadmin_editlist" s-fields=''>
-                &times;
-            </div>
-        </header>
-        <div class="w3-container articlepopup">
-        </div>
     </div>
 </div>
 
@@ -135,9 +125,6 @@
 
     function languageChange() {
         $('.dosearch').trigger("click");
-    }
-    function showpopup() {
-        $('#id01').show();
     }
 
 </script>
