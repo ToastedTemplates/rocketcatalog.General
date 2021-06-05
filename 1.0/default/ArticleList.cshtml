@@ -67,6 +67,16 @@
                         <div class="w3-rest w3-card " style="cursor: pointer;">
                             <div class="w3-bar w3-card " style="">
                                 <div class="w3-bar-item">
+                                    @if (articleData.LogoRelPath != "")
+                                    {
+                                        <img src="@ThumbnailImageUrl(articleData.LogoRelPath, 48, 48)" style="height:48px;width:48px;" class="w3-round" />
+                                    }
+                                    else
+                                    {
+                                        <img src="@ThumbnailImageUrl("/DesktopModules/DNNrocket/api/images/noimage2.png", 48, 48)" style="height:48px;width:48px;" class="w3-round" />
+                                    }
+                                </div>
+                                <div class="w3-bar-item">
                                     @articleData.Name
                                 </div>
                             </div>
