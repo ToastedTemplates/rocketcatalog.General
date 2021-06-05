@@ -12,6 +12,7 @@
     var lp1 = 0;
     var passModel = new SimplisityRazor(articleDataList.PortalCatalog, new Dictionary<string, string>());
     var appThemeSystem = new AppThemeSystemLimpet("rocketcatalog");
+    var sessionParams = Model.SessionParamsData;
 }
 
 @RenderTemplate("Popups.cshtml", appThemeSystem, Model, false)
@@ -77,6 +78,9 @@
                                     }
                                 </div>
                                 <div class="w3-bar-item">
+                                    <div class="w3-tiny">
+                                        @articleData.Ref
+                                    </div>
                                     @articleData.Name
                                 </div>
                             </div>

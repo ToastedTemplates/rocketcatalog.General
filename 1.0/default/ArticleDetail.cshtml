@@ -18,6 +18,7 @@
     }
     var portalCatalog = new PortalCatalogLimpet(articleData.PortalId, DNNrocketUtils.GetEditCulture());
     var appThemeSystem = new AppThemeSystemLimpet(portalCatalog.SystemKey);
+    var sessionParams = Model.SessionParamsData;
 }
 
     <div class='w3-animate-opacity'>
@@ -47,17 +48,17 @@
                                 @TextBox(info, "genxml/textbox/articleref", " class='w3-input w3-border' autocomplete='off' ", "", false, 0)
                             </div>
                             <div class="w3-threequarter w3-padding">
-                                <label>@ResourceKey("RC.name")</label>&nbsp;@EditFlag()
+                                <label>@ResourceKey("RC.name")</label>&nbsp;@EditFlag(sessionParams)
                                 @TextBox(info, "genxml/lang/genxml/textbox/articlename", " class='w3-input w3-border' autocomplete='off' ", "", false, 0)
                             </div>
                         </div>
                     </div>
                     <div class="w3-twothird w3-padding">
-                        <label>@ResourceKey("RC.keywords")</label>&nbsp;@EditFlag()
+                        <label>@ResourceKey("RC.keywords")</label>&nbsp;@EditFlag(sessionParams)
                         @TextArea(info, "genxml/lang/genxml/textbox/articlekeywords", "class='' ", "", false, 0)
                     </div>
                 </div>
-                <div class='w3-row w3-padding '>&nbsp;@EditFlag()
+                <div class='w3-row w3-padding '>&nbsp;@EditFlag(sessionParams)
                     @TextArea(info, "genxml/lang/genxml/textbox/articlesummary", "rows='3' style='width:100%;overflow:hidden;' ", "", false, 0)
                 </div>
 
@@ -73,7 +74,7 @@
 
                     <div id="htmltext" class='w3-row sectionname' style="display:none">
                         <div class='w3-col m12 w3-padding'>
-                            @EditFlag()
+                            @EditFlag(sessionParams)
                             @EditorQuill(info, "genxml/lang/genxml/textbox/articlerichtext", "style='min-height:150px;width:100%'", "", true)
                         </div>
                     </div>
