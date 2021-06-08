@@ -43,7 +43,7 @@
             @foreach (ArticleLimpet articleData in articleDataList.GetArticleList())
             {
                 lp1 += 1;
-                <li class="simplisity_click" s-cmd="rocketcatalog_public" s-return='#simplisitymodulewrapper' s-post=".searchdata" s-fields='{"articleid":"@(articleData.ArticleId)","systemkey":"rocketcatalog","track":"true"}' style="cursor:pointer;">
+                <li class="simplisity_click" s-cmd="rocketcatalog_public" s-return='#simplisitymodulewrapper' s-post=".searchdata" s-fields='{"articleid":"@(articleData.ArticleId)","track":"true"}' style="cursor:pointer;">
                     @articleData.Name
                 </li>
             }
