@@ -45,21 +45,21 @@
                         <div>
                             <div class="w3-quarter w3-padding">
                                 <label>@ResourceKey("RC.ref")</label>
-                                @TextBox(info, "genxml/textbox/articleref", " class='w3-input w3-border' autocomplete='off' ", "", false, 0)
+                                @TextBox(info, articleData.RefXPath, " class='w3-input w3-border' autocomplete='off' ", "", false, 0)
                             </div>
                             <div class="w3-threequarter w3-padding">
                                 <label>@ResourceKey("RC.name")</label>&nbsp;@EditFlag(sessionParams)
-                                @TextBox(info, "genxml/lang/genxml/textbox/articlename", " class='w3-input w3-border' autocomplete='off' ", "", false, 0)
+                                @TextBox(info, articleData.NameXPath, " class='w3-input w3-border' autocomplete='off' ", "", false, 0)
                             </div>
                         </div>
                     </div>
                     <div class="w3-twothird w3-padding">
                         <label>@ResourceKey("RC.keywords")</label>&nbsp;@EditFlag(sessionParams)
-                        @TextArea(info, "genxml/lang/genxml/textbox/articlekeywords", "class='' ", "", false, 0)
+                        @TextArea(info, articleData.KeyWordsXPath, "class='' ", "", false, 0)
                     </div>
                 </div>
                 <div class='w3-row w3-padding '>&nbsp;@EditFlag(sessionParams)
-                    @TextArea(info, "genxml/lang/genxml/textbox/articlesummary", "rows='3' style='width:100%;overflow:hidden;' ", "", false, 0)
+                    @TextArea(info, articleData.RichTextXPath, "rows='3' style='width:100%;overflow:hidden;' ", "", false, 0)
                 </div>
 
                 <div class='w3-row w3-padding'>
@@ -75,7 +75,7 @@
                     <div id="htmltext" class='w3-row sectionname' style="display:none">
                         <div class='w3-col m12 w3-padding'>
                             @EditFlag(sessionParams)
-                            @EditorQuill(info, "genxml/lang/genxml/textbox/articlerichtext", "style='min-height:150px;width:100%'", "", true)
+                            @EditorQuill(info, articleData.RichTextXPath, "style='min-height:150px;width:100%'", "", true)
                         </div>
                     </div>
 
